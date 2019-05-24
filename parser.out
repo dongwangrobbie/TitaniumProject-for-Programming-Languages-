@@ -1,0 +1,281 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CHAR
+    COMMA
+    INT
+    LKEY
+    RKEY
+    SEMICOLON
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> ID
+Rule 2     statement -> fun
+Rule 3     statement -> assignment
+Rule 4     statement -> empty
+Rule 5     assignment -> file_assignment
+Rule 6     assignment -> fun_assignment
+Rule 7     fun -> fun_no_param
+Rule 8     fun -> fun_single_param
+Rule 9     fun -> fun_without_operation
+Rule 10    fun_without_operation -> FUN_WITHOUT_OPERATION LP STRING RP
+Rule 11    fun_no_param -> ID DOT FUN_NO_PARAM LP RP
+Rule 12    fun_single_param -> ID DOT FUN_SINGLE_PARAM LP STRING RP
+Rule 13    file_assignment -> ID EQUALS ID
+Rule 14    fun_assignment -> ID EQUALS fun_without_operation
+Rule 15    empty -> <empty>
+
+Terminals, with rules where they appear
+
+CHAR                 : 
+COMMA                : 
+DOT                  : 11 12
+EQUALS               : 13 14
+FUN_NO_PARAM         : 11
+FUN_SINGLE_PARAM     : 12
+FUN_WITHOUT_OPERATION : 10
+ID                   : 1 11 12 13 13 14
+INT                  : 
+LKEY                 : 
+LP                   : 10 11 12
+RKEY                 : 
+RP                   : 10 11 12
+SEMICOLON            : 
+STRING               : 10 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 3
+empty                : 4
+file_assignment      : 5
+fun                  : 2
+fun_assignment       : 6
+fun_no_param         : 7
+fun_single_param     : 8
+fun_without_operation : 9 14
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . ID
+    (2) statement -> . fun
+    (3) statement -> . assignment
+    (4) statement -> . empty
+    (7) fun -> . fun_no_param
+    (8) fun -> . fun_single_param
+    (9) fun -> . fun_without_operation
+    (5) assignment -> . file_assignment
+    (6) assignment -> . fun_assignment
+    (15) empty -> .
+    (11) fun_no_param -> . ID DOT FUN_NO_PARAM LP RP
+    (12) fun_single_param -> . ID DOT FUN_SINGLE_PARAM LP STRING RP
+    (10) fun_without_operation -> . FUN_WITHOUT_OPERATION LP STRING RP
+    (13) file_assignment -> . ID EQUALS ID
+    (14) fun_assignment -> . ID EQUALS fun_without_operation
+
+    ID              shift and go to state 2
+    $end            reduce using rule 15 (empty -> .)
+    FUN_WITHOUT_OPERATION shift and go to state 11
+
+    statement                      shift and go to state 1
+    fun                            shift and go to state 3
+    assignment                     shift and go to state 4
+    empty                          shift and go to state 5
+    fun_no_param                   shift and go to state 6
+    fun_single_param               shift and go to state 7
+    fun_without_operation          shift and go to state 8
+    file_assignment                shift and go to state 9
+    fun_assignment                 shift and go to state 10
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> ID .
+    (11) fun_no_param -> ID . DOT FUN_NO_PARAM LP RP
+    (12) fun_single_param -> ID . DOT FUN_SINGLE_PARAM LP STRING RP
+    (13) file_assignment -> ID . EQUALS ID
+    (14) fun_assignment -> ID . EQUALS fun_without_operation
+
+    $end            reduce using rule 1 (statement -> ID .)
+    DOT             shift and go to state 12
+    EQUALS          shift and go to state 13
+
+
+state 3
+
+    (2) statement -> fun .
+
+    $end            reduce using rule 2 (statement -> fun .)
+
+
+state 4
+
+    (3) statement -> assignment .
+
+    $end            reduce using rule 3 (statement -> assignment .)
+
+
+state 5
+
+    (4) statement -> empty .
+
+    $end            reduce using rule 4 (statement -> empty .)
+
+
+state 6
+
+    (7) fun -> fun_no_param .
+
+    $end            reduce using rule 7 (fun -> fun_no_param .)
+
+
+state 7
+
+    (8) fun -> fun_single_param .
+
+    $end            reduce using rule 8 (fun -> fun_single_param .)
+
+
+state 8
+
+    (9) fun -> fun_without_operation .
+
+    $end            reduce using rule 9 (fun -> fun_without_operation .)
+
+
+state 9
+
+    (5) assignment -> file_assignment .
+
+    $end            reduce using rule 5 (assignment -> file_assignment .)
+
+
+state 10
+
+    (6) assignment -> fun_assignment .
+
+    $end            reduce using rule 6 (assignment -> fun_assignment .)
+
+
+state 11
+
+    (10) fun_without_operation -> FUN_WITHOUT_OPERATION . LP STRING RP
+
+    LP              shift and go to state 14
+
+
+state 12
+
+    (11) fun_no_param -> ID DOT . FUN_NO_PARAM LP RP
+    (12) fun_single_param -> ID DOT . FUN_SINGLE_PARAM LP STRING RP
+
+    FUN_NO_PARAM    shift and go to state 15
+    FUN_SINGLE_PARAM shift and go to state 16
+
+
+state 13
+
+    (13) file_assignment -> ID EQUALS . ID
+    (14) fun_assignment -> ID EQUALS . fun_without_operation
+    (10) fun_without_operation -> . FUN_WITHOUT_OPERATION LP STRING RP
+
+    ID              shift and go to state 17
+    FUN_WITHOUT_OPERATION shift and go to state 11
+
+    fun_without_operation          shift and go to state 18
+
+state 14
+
+    (10) fun_without_operation -> FUN_WITHOUT_OPERATION LP . STRING RP
+
+    STRING          shift and go to state 19
+
+
+state 15
+
+    (11) fun_no_param -> ID DOT FUN_NO_PARAM . LP RP
+
+    LP              shift and go to state 20
+
+
+state 16
+
+    (12) fun_single_param -> ID DOT FUN_SINGLE_PARAM . LP STRING RP
+
+    LP              shift and go to state 21
+
+
+state 17
+
+    (13) file_assignment -> ID EQUALS ID .
+
+    $end            reduce using rule 13 (file_assignment -> ID EQUALS ID .)
+
+
+state 18
+
+    (14) fun_assignment -> ID EQUALS fun_without_operation .
+
+    $end            reduce using rule 14 (fun_assignment -> ID EQUALS fun_without_operation .)
+
+
+state 19
+
+    (10) fun_without_operation -> FUN_WITHOUT_OPERATION LP STRING . RP
+
+    RP              shift and go to state 22
+
+
+state 20
+
+    (11) fun_no_param -> ID DOT FUN_NO_PARAM LP . RP
+
+    RP              shift and go to state 23
+
+
+state 21
+
+    (12) fun_single_param -> ID DOT FUN_SINGLE_PARAM LP . STRING RP
+
+    STRING          shift and go to state 24
+
+
+state 22
+
+    (10) fun_without_operation -> FUN_WITHOUT_OPERATION LP STRING RP .
+
+    $end            reduce using rule 10 (fun_without_operation -> FUN_WITHOUT_OPERATION LP STRING RP .)
+
+
+state 23
+
+    (11) fun_no_param -> ID DOT FUN_NO_PARAM LP RP .
+
+    $end            reduce using rule 11 (fun_no_param -> ID DOT FUN_NO_PARAM LP RP .)
+
+
+state 24
+
+    (12) fun_single_param -> ID DOT FUN_SINGLE_PARAM LP STRING . RP
+
+    RP              shift and go to state 25
+
+
+state 25
+
+    (12) fun_single_param -> ID DOT FUN_SINGLE_PARAM LP STRING RP .
+
+    $end            reduce using rule 12 (fun_single_param -> ID DOT FUN_SINGLE_PARAM LP STRING RP .)
+
